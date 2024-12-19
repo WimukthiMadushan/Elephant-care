@@ -1,12 +1,18 @@
 import React from "react";
-import NavBar from "../../Components/NavBar/NavBar";
 import Header from "../../Components/Header/Header";
+import AboutElephant from "../../Components/AboutElephant/AboutElephant";
+import ElephantFeatures from "../../Components/ElephantFeatures/ElephantFeatures";
+import Galary from "../../Components/Galary/Galary";
+import ElephantLocations from "../../Components/ElephantLocations/ElephantLocations";
 
 const HomePage = () => {
   return (
     <div>
-      <NavBar />
       <Header />
+      <AboutElephant />
+      <ElephantFeatures />
+      <Galary />
+      <ElephantLocations />
     </div>
   );
 };
