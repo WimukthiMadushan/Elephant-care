@@ -1,5 +1,12 @@
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/HomePage/HomePage";
+
 function App() {
-  return <h1>App</h1>;
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+    </Routes>
+  );
 }
 
 export default App;
