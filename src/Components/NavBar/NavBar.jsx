@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import logo from "../../assets/Logo.png";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import { Link } from "react-router-dom";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Tooltip from "@mui/material/Tooltip";
 
 function NavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -19,7 +20,7 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <div className="bg-[#09332d] flex justify-between items-center hover:shadow-md hover:shadow-green-700 hover:transition duration-700">
+      <div className="bg-[#09332d] flex justify-between items-center hover:shadow-sm hover:shadow-green-600 hover:transition duration-700 z-50 fixed w-full">
         <div className="flex items-center ">
           <img src={logo} alt="logo-image" />
           <h1 className="text-[#f8dea9] text-[1.5rem] font-poppins font-semibold">
@@ -47,17 +48,19 @@ function NavBar() {
               </a>
             </li>
             <li className="group cursor-pointer">
-              <a className="relative inline-block" onClick={handleClick}>
-                All Collars
-                <ArrowDropDownIcon />
-                <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              <Tooltip title="Dropdown">
+                <a className="relative inline-block" onClick={handleClick}>
+                  All Collars
+                  <ArrowDropDownIcon />
+                  <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </Tooltip>
               <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <MenuItem onClick={handleClose} component={Link} to="/link1">
-                  Link 1
+                  Health Prediction
                 </MenuItem>
                 <MenuItem onClick={handleClose} component={Link} to="/link2">
-                  Link 2
+                  Accident Prediction
                 </MenuItem>
               </Menu>
             </li>
@@ -79,7 +82,9 @@ function NavBar() {
         <div className="flex items-center space-x-2 pr-[4rem] text-white font-poppins text-[0.9rem]">
           <button className="group relative text-white transition-all duration-300">
             <div className="flex items-center space-x-1">
-              <NotificationsNoneRoundedIcon className="text-white" />
+              <Tooltip title="Notification">
+                <NotificationsNoneRoundedIcon className="text-white" />
+              </Tooltip>
               <span class="relative top-[-0.6rem] right-2 flex h-2 w-2 rounded-full">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f8dea9] opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-[#f8dea9]"></span>
