@@ -1,0 +1,37 @@
+.gallery-container {
+  text-align: center;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.gallery-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  width: 200%; /* To allow for continuous scrolling */
+  animation: scrollLeftRight 20s linear infinite;
+}
+
+.gallery-image {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  margin: 0 10px;
+  border-radius: 10px;
+}
+
+@keyframes scrollLeftRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
