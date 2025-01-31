@@ -9,11 +9,13 @@ function Header() {
       <img
         src={Header_img}
         alt="header-image"
-        className="w-full h-[100vh] object-cover"
+        className="w-full h-[100vh] object-cover md:object-cover lg:object-cover"
       />
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-black via-black to-transparent opacity-65"></div>
-      <div className="absolute top-2/3 left-4 transform -translate-y-1/2 z-10 font-poppins ml-7">
-        <p className="text-white text-[3.5rem] font-semibold">
+
+      {/* Text Content */}
+      <div className="absolute top-[70%] left-4 transform -translate-y-1/2 z-10 font-poppins ml-4 md:ml-7">
+        <p className="text-white text-[2rem] md:text-[3rem] lg:text-[3.5rem] font-semibold leading-tight">
           Protect Elephant is
         </p>
         <ReactTyped
@@ -24,12 +26,14 @@ function Header() {
           startDelay={500}
           loop={true}
           showCursor={true}
-          className="text-white text-[3.5rem] font-semibold"
+          className="text-white text-[2rem] md:text-[3rem] lg:text-[3.5rem] font-semibold leading-tight"
         />
       </div>
-      <div className="absolute top-[80%] left-4 ml-7">
+
+      {/* Button */}
+      <div className="absolute top-[80%] left-4 ml-4 md:ml-7">
         <Tooltip title="Explore Elephant's Health">
-          <button className=" bg-transparent border-[1px] border-green-500 text-green-500 px-8 py-3 text-xl font-semibold rounded-full transform  hover:text-white hover:scale-104 transition-all">
+          <button className="bg-transparent border-[1px] border-green-500 text-green-500 px-6 py-2 md:px-8 md:py-3 text-lg md:text-xl font-semibold rounded-full transform hover:text-white hover:scale-105 transition-all">
             Explore Health
           </button>
         </Tooltip>
