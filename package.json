@@ -17,14 +17,17 @@
     "@mui/x-charts": "^7.23.2",
     "@react-google-maps/api": "^2.20.3",
     "chart.js": "^4.4.7",
+    "firebase": "^11.2.0",
     "leaflet": "^1.9.4",
     "leaflet.gridlayer.googlemutant": "^0.14.1",
+    "lucide-react": "^0.474.0",
     "motion": "^11.15.0",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^7.0.2",
+    "react-toastify": "^11.0.3",
     "react-typed": "^2.0.12"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
@@ -6,6 +6,9 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import logo from "../../assets/Logo.png";
 import Login from "../Login/Login";
 import NotificationPopup from "../NotificationPopup/NotificationPopup";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { User } from "lucide-react";
+import { auth } from "../../firebase";
 
 function NavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -27,6 +30,27 @@ function NavBar() {
       route: "/notification",
     },
   ]);
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast.success("Logged out successfully", {
+        position: "bottom-right",
+        theme: "colored",
+      });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const open = Boolean(anchorEl);
   const unreadNotifications = notifications.filter((notif) => !notif.isRead);
@@ -158,18 +182,27 @@ function NavBar() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f8dea9] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f8dea9]"></span>
           </span>
-          <button
-            className="py-2 px-3 rounded-md hover:scale-105 transform transition duration-300"
-            onClick={() => openLoginModal("Sign Up")}
-          >
-            Sign Up
-          </button>
-          <button
-            className="py-2 px-3 rounded-md hover:scale-105 transform transition duration-300"
-            onClick={() => openLoginModal("Sign In")}
-          >
-            Sign In
-          </button>
+          {user ? (
+            <>
+              <User />
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <button
+                className="py-2 px-3 rounded-md hover:scale-105 transform transition duration-300"
+                onClick={() => openLoginModal("Sign Up")}
+              >
+                Sign Up
+              </button>
+              <button
+                className="py-2 px-3 rounded-md hover:scale-105 transform transition duration-300"
+                onClick={() => openLoginModal("Sign In")}
+              >
+                Sign In
+              </button>
+            </>
+          )}
         </div>
       </div>
       {showLogin && <Login setShowLogin={setShowLogin} mode={loginMode} />}
