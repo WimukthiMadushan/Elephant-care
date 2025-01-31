@@ -95,11 +95,12 @@ function ElephantProfile() {
           </div>
         </div>
       </div>
-      <div ref={mapRef}>
-        <ElephantLocations elephantLocations={elephantLocation} />
-      </div>
+
       <div ref={situationRef}>
         <SituationAnalysis data={situationData} />
+      </div>
+      <div ref={mapRef}>
+        <ElephantLocations elephantLocations={elephantLocation} />
       </div>
     </div>
   );

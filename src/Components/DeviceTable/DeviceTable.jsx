@@ -21,7 +21,7 @@ const DeviceTable = ({ device }) => {
 
         <div>
           <Link
-            to={`/situationAnalysis/${device.id}`}
+            to={`/elephantprofile/${device.id}`}
             className="text-[1rem] font-bold text-gray-700"
           >
             <h2 className="text-[1rem] font-bold text-gray-700">
