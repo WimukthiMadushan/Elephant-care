@@ -8,6 +8,7 @@ import Notification from "./Pages/Notification/Notification";
 import Charts from "./Pages/Charts/Charts";
 import ElephantProfile from "./Pages/ElephantProfile/ElephantProfile";
 import SituationAnalysis from "./Components/SituationAnalysis/SituationAnalysis";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="/devicefeatures" element={<DeviceFeatures />} />
         <Route path="/elephanthealth" element={<ElephantHealth />} />
-        <Route path="/chartsdetails" element={<Charts />} />
+        <Route path="/chartsdetails/:id" element={<Charts />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/elephantprofile/:id" element={<ElephantProfile />} />
         <Route path="/situationAnalysis/:id" element={<SituationAnalysis />} />

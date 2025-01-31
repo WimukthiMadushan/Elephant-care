@@ -4,6 +4,7 @@ import DeviceTable from "../../Components/DeviceTable/DeviceTable";
 function ElephantHealth() {
   const numberOfDevices = [
     {
+      id: 1,
       live: true,
       beltNo: "IRI2024-002",
       status: "",
@@ -17,6 +18,7 @@ function ElephantHealth() {
       Battery: 25,
     },
     {
+      id: 2,
       live: true,
       beltNo: "IRI2024-003",
       status: "",
@@ -30,6 +32,7 @@ function ElephantHealth() {
       Battery: 50,
     },
     {
+      id: 3,
       live: true,
       beltNo: "IRI2024-004",
       status: "",
@@ -43,6 +46,7 @@ function ElephantHealth() {
       Battery: 80,
     },
     {
+      id: 4,
       live: true,
       beltNo: "IRI2024-005",
       status: "",
@@ -56,6 +60,7 @@ function ElephantHealth() {
       Battery: 60,
     },
     {
+      id: 5,
       live: false,
       beltNo: "IRI2024-006",
       status: "",

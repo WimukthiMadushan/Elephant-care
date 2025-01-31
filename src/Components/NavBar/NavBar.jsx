@@ -79,8 +79,8 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar max-w-[100%] overflow-y-hidden">
-      <div className="bg-[#09332d] flex justify-between items-center px-4 py-3 md:px-8 hover:shadow-sm hover:shadow-green-600 hover:transition duration-700 z-20 fixed w-[100vw]">
+    <nav className="navbar max-w-[100%] overflow-y-hidden z-50">
+      <div className="bg-[#09332d] flex justify-between items-center px-4 py-3 md:px-8 hover:shadow-sm hover:shadow-green-600 hover:transition duration-700 z-50 fixed w-[100vw]">
         {/* Logo Section */}
         <div className="flex items-center space-x-3">
           <img src={logo} alt="logo" className="h-8" />
@@ -167,17 +167,21 @@ function NavBar() {
         {/* Actions */}
         <div className="flex items-center space-x-3 text-white font-poppins text-sm md:text-[0.9rem]">
           <Tooltip title="Notification">
-            <NotificationsNoneRoundedIcon
-              className="text-white cursor-pointer"
-              onClick={togglePopup}
-            />
+            <Link to={"/notification"}>
+              <NotificationsNoneRoundedIcon
+                className="text-white cursor-pointer"
+                onClick={togglePopup}
+              />
+            </Link>
           </Tooltip>
+          {/* 
           {isPopupVisible && (
             <NotificationPopup
               notifications={unreadNotifications}
               onNotificationClick={markNotificationAsRead}
             />
           )}
+          */}
           <span className="relative top-[-0.6rem] right-3 flex h-2 w-2 rounded-full">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f8dea9] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f8dea9]"></span>

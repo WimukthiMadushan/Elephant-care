@@ -2,6 +2,8 @@ import React from "react";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import Elephant_icon from "../../assets/Elephant_icon.png";
 import BatteryIndicator from "../BatteryIndicator/BatteryIndicator";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 
 const DeviceTable = ({ device }) => {
   return (
@@ -18,9 +20,14 @@ const DeviceTable = ({ device }) => {
         </div>
 
         <div>
-          <h2 className="text-[1rem] font-bold text-gray-700">
-            Belt No - <span className="font-bold">{device.beltNo}</span>
-          </h2>
+          <Link
+            to={`/situationAnalysis/${device.id}`}
+            className="text-[1rem] font-bold text-gray-700"
+          >
+            <h2 className="text-[1rem] font-bold text-gray-700">
+              Belt No - <span className="font-bold">{device.beltNo}</span>
+            </h2>
+          </Link>
         </div>
 
         {/* Status Dots */}
@@ -68,6 +75,13 @@ const DeviceTable = ({ device }) => {
             <li>
               <span className="font-bold">Status:</span>
               <span className="ml-2">{device.Status}</span>
+            </li>
+            <li>
+              <Link to={`/chartsdetails/${device.id}`}>
+                <button className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition-all duration-300">
+                  More <ChevronRight size={15} />
+                </button>
+              </Link>
             </li>
           </ul>
         </div>
