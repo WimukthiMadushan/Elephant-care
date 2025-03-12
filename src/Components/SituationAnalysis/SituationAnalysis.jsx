@@ -1,7 +1,8 @@
 import React from "react";
 import PreviousSituations from "../PreviousSituations/PreviousSituations";
 
-const SituationAnalysis = ({ data }) => {
+const SituationAnalysis = ({ data, elephantData }) => {
+  console.log("here the data", data);
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg mt-6 w-[90%] mx-auto">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
@@ -31,14 +32,15 @@ const SituationAnalysis = ({ data }) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-6 text-center">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-          Prediction Situation
+      <div className="mt-6">
+        <h2 className="text-xl font-semibold text-gray-800 mb-3">
+          LLM Predictions
         </h2>
-        <p className="text-gray-600 text-lg bg-gray-100 py-3 px-6 rounded-lg inline-block shadow">
-          No prediction now
-        </p>
-        <PreviousSituations />
+        <p>{elephantData.llm_prediction.analysis}</p>
+        <p>{elephantData.llm_prediction.hypothesis}</p>
+      </div>
+      <div className="mt-6 text-center">
+        <PreviousSituations elephantData={elephantData} />
       </div>
     </div>
   );

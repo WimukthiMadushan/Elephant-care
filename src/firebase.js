@@ -1,19 +1,23 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
+import { getDatabase, ref, set, get, child, onValue, push } from "firebase/database";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDYruG7dn35V3MPj-albSuZ1Gj9D18q7lQ",
-  authDomain: "elephant-care.firebaseapp.com",
-  projectId: "elephant-care",
-  storageBucket: "elephant-care.firebasestorage.app",
-  messagingSenderId: "56025208991",
-  appId: "1:56025208991:web:b707e06f0074f7e5e1eaaa",
-  measurementId: "G-6JK6208WFB"
+  apiKey: "AIzaSyCh01aWLQ8RlxrP1JRqEV8buoCK3ux6Gm4",
+  authDomain: "elephant-care-e17df.firebaseapp.com",
+  databaseURL: "https://elephant-care-e17df-default-rtdb.firebaseio.com",
+  projectId: "elephant-care-e17df",
+  storageBucket: "elephant-care-e17df.firebasestorage.app",
+  messagingSenderId: "928898899621",
+  appId: "1:928898899621:web:867b21427e439ff9c6f74c",
+  measurementId: "G-DVLNQEH01E"
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const analytics = getAnalytics(firebaseApp);
+const database = getDatabase(firebaseApp);
 
-export { auth,  analytics };
+export { auth, analytics, ref, set, get, child, onValue, database, push };

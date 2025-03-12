@@ -1,89 +1,52 @@
 import React from "react";
 import DeviceTable from "../../Components/DeviceTable/DeviceTable";
+import Skelton from "../../Components/Skelton/Skelton";
+import { useGlobalData } from "../../Hooks/GlobalDataContext";
 
 function ElephantHealth() {
-  const numberOfDevices = [
-    {
-      id: 1,
-      live: true,
-      beltNo: "IRI2024-002",
-      status: "",
-      isOn: true,
-      Heart_Beat: 37.7,
-      Body_Temperature: 39.8,
-      Blood_Oxygen: 99.4,
-      Status: "Normal",
-      Time: "15 hours ago",
-      Date: "2024-11-28",
-      Battery: 25,
-    },
-    {
-      id: 2,
-      live: true,
-      beltNo: "IRI2024-003",
-      status: "",
-      isOn: false,
-      Heart_Beat: 40.2,
-      Body_Temperature: 38.5,
-      Blood_Oxygen: 98.8,
-      Status: "Normal",
-      Time: "12 hours ago",
-      Date: "2024-11-27",
-      Battery: 50,
-    },
-    {
-      id: 3,
-      live: true,
-      beltNo: "IRI2024-004",
-      status: "",
-      isOn: true,
-      Heart_Beat: 36.5,
-      Body_Temperature: 37.2,
-      Blood_Oxygen: 96.4,
-      Status: "Critical",
-      Time: "8 hours ago",
-      Date: "2024-11-28",
-      Battery: 80,
-    },
-    {
-      id: 4,
-      live: true,
-      beltNo: "IRI2024-005",
-      status: "",
-      isOn: true,
-      Heart_Beat: 35.9,
-      Body_Temperature: 36.7,
-      Blood_Oxygen: 95.2,
-      Status: "Normal",
-      Time: "2 hours ago",
-      Date: "2024-11-28",
-      Battery: 60,
-    },
-    {
-      id: 5,
-      live: false,
-      beltNo: "IRI2024-006",
-      status: "",
-      isOn: false,
-      Heart_Beat: 38.0,
-      Body_Temperature: 39.0,
-      Blood_Oxygen: 97.5,
-      Status: "Normal",
-      Time: "20 hours ago",
-      Date: "2024-11-26",
-      Battery: 15,
-    },
-  ];
+  const { elephants } = useGlobalData();
 
   return (
     <div className="pt-[8rem] bg-gray-100">
-      <h1 className="text-center text-[3rem] font-bold text-[#d46429]">
-        Elephant Healthy Analysis
-      </h1>
-      <div className="min-h-screen flex items-center justify-center flex-col p-4 gap-4">
-        {numberOfDevices.map((device, index) => (
-          <DeviceTable key={index} device={device} />
-        ))}
+      <div className="flex items-center justify-center gap-[5rem]">
+        <h1 className="text-center text-[3rem] font-bold text-[#d46429] mb-0">
+          Elephant Health Analysis
+        </h1>
+        <div className="flex flex-col items-start gap-2">
+          <div className="flex items-center gap-2">
+            <span className="h-4 w-4 bg-green-600 rounded-full"></span>
+            <p className="text-left">Healthy</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-4 w-4 bg-blue-500 rounded-full"></span>
+            <p className="text-left">Normal</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-4 w-4 bg-red-700 rounded-full"></span>
+            <p className="text-left">Critical</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-4 w-4 bg-gray-600 rounded-full"></span>
+            <p className="text-left">Dead</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-4 w-4 bg-yellow-500 rounded-full"></span>
+            <p className="text-left">ON</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="h-4 w-4 bg-black rounded-full"></span>
+            <p className="text-left">OFF</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center justify-center flex-col p-4 gap-[3rem] h-[30rem]">
+        {elephants.length === 0 ? (
+          <Skelton />
+        ) : (
+          elephants.map((elephant, index) => (
+            <DeviceTable key={index} device={elephant} />
+          ))
+        )}
       </div>
     </div>
   );

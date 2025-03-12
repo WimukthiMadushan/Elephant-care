@@ -12,6 +12,9 @@ import {
 } from "chart.js";
 import ElephantLocations from "../../Components/ElephantLocations/ElephantLocations";
 import HeartbeatGraph from "../../Components/HeartBeat/HeartbeatGraph";
+import BodyTempratureGraph from "../../Components/BodyTemperatureGraph/BodyTemperatureGraph";
+import BloodOxygenGraph from "./../../Components/BloodOxygenGraph/BloodOxygenGraph";
+import { useLocation } from "react-router-dom";
 
 ChartJS.register(
   ArcElement,
@@ -31,11 +34,18 @@ const coordinates = [
 ];
 
 function Charts() {
+  const location = useLocation();
+  const device = location.state?.device;
+
+  if (!device) {
+    return <p>No device data found.</p>;
+  }
+
   const data = {
     labels: ["Heart Beat(bpm)", "Body Temperature", "Blood Oxygen(%)"],
     datasets: [
       {
-        data: [40, 10, 80],
+        data: [device.Heart_Beat, device.Body_Temperature, device.Blood_Oxygen],
         backgroundColor: ["#ff7043", "#66bb6a", "#42a5f5"],
         borderColor: ["#ff5722", "#388e3c", "#1976d2"],
         borderWidth: 2,
@@ -47,8 +57,7 @@ function Charts() {
     labels: ["Heart Beat(bpm)", "Body Temperature", "Blood Oxygen(%)"],
     datasets: [
       {
-        label: "Health Metrics",
-        data: [50, 10, 80],
+        data: [device.Heart_Beat, device.Body_Temperature, device.Blood_Oxygen],
         backgroundColor: ["#ff7043", "#66bb6a", "#42a5f5"],
         borderColor: ["#ff5722", "#388e3c", "#1976d2"],
         borderWidth: 2,
@@ -88,7 +97,7 @@ function Charts() {
       <h1 className="text-center text-[3rem] font-bold text-[#d46429] mb-8">
         Elephant Health Metrics
       </h1>
-      <div className="flex justify-center items-center mt-8 flex-wrap">
+      <div className="flex justify-center items-center mt-8 flex-wrap mb-5">
         <div className="w-full max-w-[500px] min-w-[500px] h-[400px] py-[5rem] mx-[5rem]">
           <Bar data={barData} options={options} />
         </div>
@@ -97,6 +106,8 @@ function Charts() {
         </div>
       </div>
       <HeartbeatGraph />
+      <BodyTempratureGraph />
+      <BloodOxygenGraph />
       <ElephantLocations elephantLocations={coordinates} />
     </div>
   );

@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { database, ref, onValue } from "./../../firebase";
 import Elephant from "./../../assets/Elephant.png";
 import { useParams } from "react-router-dom";
 import ElephantLocations from "../../Components/ElephantLocations/ElephantLocations";
@@ -8,32 +9,56 @@ function ElephantProfile() {
   const { id } = useParams();
   const mapRef = useRef(null);
   const situationRef = useRef(null);
-  const elephantLocation = [
-    { lat: 6.8743, lng: 80.7602, name: "Udawalawe National Park, Sri Lanka" },
-  ];
+  const [elephantData, setElephantData] = useState(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const elephantRef = ref(database, `predictions/${id}`);
+
+    const unsubscribe = onValue(elephantRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setElephantData(snapshot.val());
+        console.log("elephant data", elephantData);
+      } else {
+        setElephantData(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [id]);
+
+  if (!elephantData) {
+    return <div className="text-center mt-10 text-lg">Loading...</div>;
+  }
 
   const situationData = [
     {
       parameter: "Heart Rate",
-      status: "Minor heart rate fluctuation, no critical health risk",
+      status: elephantData.predictions?.HR?.Estimation || "No Data",
     },
     {
       parameter: "Oxygen Rate",
-      status: "Minor fluctuation in oxygen levels, no critical event",
+      status: elephantData.predictions?.SPO2?.Estimation || "No Data",
     },
     {
       parameter: "Gyroscope",
-      status: "Minor rotational anomaly, no significant impact",
+      status: elephantData.predictions?.gyro_x?.Estimation || "No Data",
     },
     {
       parameter: "Accelerometer",
-      status: "Minor acceleration detected, no significant impact",
+      status: elephantData.predictions?.acceleration_x?.Estimation || "No Data",
     },
+  ];
+
+  const elephantLocation = [
+    { lat: 6.8743, lng: 80.7602, name: "Udawalawe National Park, Sri Lanka" },
   ];
 
   const handleScrollToMap = () => {
     mapRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
   const handleScrollToSituation = () => {
     situationRef.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -43,6 +68,7 @@ function ElephantProfile() {
       <h1 className="text-center text-[3rem] font-bold text-[#d46429] pb-5 font-poppins">
         Elephant Profile
       </h1>
+
       <div className="flex justify-center items-start gap-10 max-w-[80%] mx-auto bg-white p-8 rounded-lg shadow-md">
         <div className="flex-shrink-0">
           <img
@@ -55,27 +81,26 @@ function ElephantProfile() {
         <div className="flex-grow">
           <div className="mb-6">
             <h2 className="text-xl font-bold text-gray-700 mb-2">
-              Elephant ID:{" "}
-              <span className="font-normal text-gray-600">IR00345</span>
+              Belt No:{" "}
+              <span className="font-normal text-gray-600">
+                {elephantData.beltNo}
+              </span>
             </h2>
-            <p className="text-lg text-gray-600">
-              <span className="font-medium">Alert Receive Date:</span>{" "}
-              09-September-2024
-            </p>
-            <p className="text-lg text-gray-600">
-              <span className="font-medium">Alert Receive Time:</span> 09.26.45
-              P.M
-            </p>
+            <h2 className="text-xl font-bold text-gray-700 mb-2">
+              Elephant Id:{" "}
+              <span className="font-normal text-gray-600">
+                {elephantData.elephant_id}
+              </span>
+            </h2>
           </div>
 
           <div className="bg-gray-100 p-4 rounded-md shadow-inner mb-6">
             <h3 className="text-lg font-semibold text-gray-700 mb-3">Issue</h3>
             <ul className="list-disc pl-5 space-y-2 text-gray-600">
-              <li>Chest Movement - Rapid (&gt; 15 breath/min) due to stress</li>
-              <li>
-                Motion Data - High (increased movement or erratic behavior)
-              </li>
-              <li>Body Temperature &gt; 100 F</li>
+              <li>Heart Beat: {elephantData.Heart_Beat} bpm</li>
+              <li>Oxygen Level: {elephantData.Blood_Oxygen}%</li>
+              <li>Body Temperature: {elephantData.Body_Temperature}°F</li>
+              <li>Status: {elephantData.Status}</li>
             </ul>
           </div>
 
@@ -97,7 +122,7 @@ function ElephantProfile() {
       </div>
 
       <div ref={situationRef}>
-        <SituationAnalysis data={situationData} />
+        <SituationAnalysis data={situationData} elephantData={elephantData} />
       </div>
       <div ref={mapRef}>
         <ElephantLocations elephantLocations={elephantLocation} />

@@ -4,8 +4,10 @@ import Elephant_icon from "../../assets/Elephant_icon.png";
 import BatteryIndicator from "../BatteryIndicator/BatteryIndicator";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+import { Tooltip } from "@mui/material";
 
 const DeviceTable = ({ device }) => {
+  console.log(device);
   return (
     <div className="border-2 border-gray-600 rounded-lg shadow-lg overflow-hidden bg-white w-full max-w-5xl mx-auto">
       <div className="flex items-center justify-between bg-gray-50 px-6 py-4 border-b-2 border-gray-600">
@@ -20,14 +22,16 @@ const DeviceTable = ({ device }) => {
         </div>
 
         <div>
-          <Link
-            to={`/elephantprofile/${device.id}`}
-            className="text-[1rem] font-bold text-gray-700"
-          >
-            <h2 className="text-[1rem] font-bold text-gray-700">
-              Belt No - <span className="font-bold">{device.beltNo}</span>
-            </h2>
-          </Link>
+          <Tooltip title="Elephant Profile" arrow>
+            <Link
+              to={`/elephantprofile/${device.id}`}
+              className="text-[1rem] font-bold text-gray-700"
+            >
+              <h2 className="text-[1rem] font-bold text-gray-700">
+                Belt No - <span className="font-bold">{device.beltNo}</span>
+              </h2>
+            </Link>
+          </Tooltip>
         </div>
 
         {/* Status Dots */}
@@ -77,7 +81,7 @@ const DeviceTable = ({ device }) => {
               <span className="ml-2">{device.Status}</span>
             </li>
             <li>
-              <Link to={`/chartsdetails/${device.id}`}>
+              <Link to={`/chartsdetails/${device.id}`} state={{ device }}>
                 <button className="flex items-center gap-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-2 rounded-lg transition-all duration-300">
                   More <ChevronRight size={15} />
                 </button>

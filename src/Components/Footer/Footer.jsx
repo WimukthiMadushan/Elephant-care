@@ -103,7 +103,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[#0e4a42] text-center py-4 text-sm">
+      <div className="bg-[#0e4a42] text-center py-6 text-sm">
         <p>&copy; 2024 Your Company. All rights reserved.</p>
       </div>
     </footer>

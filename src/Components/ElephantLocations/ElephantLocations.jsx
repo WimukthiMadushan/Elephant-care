@@ -33,6 +33,9 @@ function ElephantLocations({ elephantLocations }) {
         <MapContainer
           center={[7.8731, 80.7718]}
           zoom={7}
+          zoomControl={false}
+          scrollWheelZoom={true}
+          style={{ height: "300px" }}
           maxBounds={sriLankaBounds}
           maxBoundsViscosity={1.0}
           className="h-[300px] sm:h-[400px] md:h-[500px] w-full"
