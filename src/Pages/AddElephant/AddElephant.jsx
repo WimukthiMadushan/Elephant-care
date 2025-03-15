@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddElephant = () => {
   const [elephantId, setElephantId] = useState("");
+  const [name, setName] = useState("");
   const [beltNo, setBeltNo] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -19,6 +20,7 @@ const AddElephant = () => {
 
     const elephantData = {
       elephant_id: elephantId,
+      name: name,
       beltNo: beltNo,
       age: age,
       gender: gender,
@@ -94,6 +96,14 @@ const AddElephant = () => {
             placeholder="Elephant ID"
             value={elephantId}
             onChange={(e) => setElephantId(e.target.value)}
+            className="border p-2 w-full rounded-md focus:ring focus:ring-blue-300"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Elephant Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="border p-2 w-full rounded-md focus:ring focus:ring-blue-300"
             required
           />

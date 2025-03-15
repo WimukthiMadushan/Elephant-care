@@ -65,6 +65,10 @@ const DeviceTable = ({ device }) => {
         <div className="col-span-2 p-6">
           <ul className="space-y-2 text-gray-700 text-sm">
             <li>
+              <span className="font-bold">Name:</span>
+              <span className="ml-2">{device.Name}</span>
+            </li>
+            <li>
               <span className="font-bold">Heart Beat:</span>
               <span className="ml-2">{device.Heart_Beat} bmp</span>
             </li>

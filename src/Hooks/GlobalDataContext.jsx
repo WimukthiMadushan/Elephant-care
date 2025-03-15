@@ -66,6 +66,7 @@ export const GlobalDataProvider = ({ children }) => {
 
             return {
               id: elephantId,
+              Name: elephantData?.name || "N/A",
               beltNo: elephantData?.beltNo || "N/A",
               Heart_Beat: elephantData?.Heart_Beat || "N/A",
               Blood_Oxygen: elephantData?.Blood_Oxygen || "N/A",
