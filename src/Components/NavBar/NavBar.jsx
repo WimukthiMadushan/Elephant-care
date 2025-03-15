@@ -15,7 +15,7 @@ function NavBar() {
   const [showLogin, setShowLogin] = useState(false);
   const [loginMode, setLoginMode] = useState("Sign In");
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false); // Loading state for authentication
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
 
   const { notifications } = useGlobalData();
@@ -147,6 +147,14 @@ function NavBar() {
             >
               Map
             </button>
+          </li>
+          <li>
+            <Link
+              to="/addelephant"
+              className="hover:text-[#f8dea9] transition duration-300"
+            >
+              Add Elephant
+            </Link>
           </li>
         </ul>
         <div className="flex items-center space-x-2 text-white text-sm">

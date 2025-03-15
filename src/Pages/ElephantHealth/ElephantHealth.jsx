@@ -6,6 +6,8 @@ import { useGlobalData } from "../../Hooks/GlobalDataContext";
 function ElephantHealth() {
   const { elephants } = useGlobalData();
 
+  console.log("Elephants:", elephants);
+
   return (
     <div className="pt-[8rem] bg-gray-100">
       <div className="flex items-center justify-center gap-[5rem]">
@@ -39,8 +41,8 @@ function ElephantHealth() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center flex-col p-4 gap-[3rem] h-[30rem]">
-        {elephants.length === 0 ? (
+      <div className="flex items-center justify-center flex-col p-4 gap-[3rem] h-full">
+        {!elephants ? (
           <Skelton />
         ) : (
           elephants.map((elephant, index) => (

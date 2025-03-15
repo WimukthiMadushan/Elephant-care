@@ -9,7 +9,7 @@ import { Tooltip } from "@mui/material";
 const DeviceTable = ({ device }) => {
   console.log(device);
   return (
-    <div className="border-2 border-gray-600 rounded-lg shadow-lg overflow-hidden bg-white w-full max-w-5xl mx-auto">
+    <div className="border-2 border-gray-600 rounded-lg shadow-lg overflow-hidden bg-white w-full max-w-5xl mx-auto min-h-[15rem]">
       <div className="flex items-center justify-between bg-gray-50 px-6 py-4 border-b-2 border-gray-600">
         {/* Live Status */}
         <div className="flex items-center gap-2">
@@ -57,7 +57,7 @@ const DeviceTable = ({ device }) => {
       </div>
 
       {/* Table Body */}
-      <div className="grid grid-cols-5 border-t-2 divide-x-4 divide-gray-300">
+      <div className="grid grid-cols-5 border-t-2 divide-x-4 divide-gray-300 ">
         <div className="flex items-center justify-center p-6">
           <img src={Elephant_icon} alt="elephant icon" />
         </div>
@@ -75,6 +75,14 @@ const DeviceTable = ({ device }) => {
             <li>
               <span className="font-bold">Blood Oxygen:</span>
               <span className="ml-2">{device.Blood_Oxygen}%</span>
+            </li>
+            <li>
+              <span className="font-bold">Age:</span>
+              <span className="ml-2">{device.Age}</span>
+            </li>
+            <li>
+              <span className="font-bold">Gender</span>
+              <span className="ml-2">{device.Gender}</span>
             </li>
             <li>
               <span className="font-bold">Status:</span>

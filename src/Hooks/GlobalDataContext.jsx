@@ -8,7 +8,7 @@ const GlobalDataContext = createContext();
 export const useGlobalData = () => useContext(GlobalDataContext);
 
 export const GlobalDataProvider = ({ children }) => {
-  const [elephants, setElephants] = useState([]);
+  const [elephants, setElephants] = useState();
   const [notifications, setNotifications] = useState([]);
   const { triggerNotification } = useNotification();
 
@@ -27,13 +27,14 @@ export const GlobalDataProvider = ({ children }) => {
           })
         );
         setNotifications(formattedNotifications);
+        console.log("Notifications state", notifications);
       }
     });
 
+    // Fetch predictions from Firebase
     const unsubscribePredictions = onValue(dataRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log("Fetched data:", data);
         const newNotifications = [];
 
         const formattedData = Object.entries(data).map(
@@ -69,6 +70,8 @@ export const GlobalDataProvider = ({ children }) => {
               Heart_Beat: elephantData?.Heart_Beat || "N/A",
               Blood_Oxygen: elephantData?.Blood_Oxygen || "N/A",
               Body_Temperature: elephantData?.Body_Temperature || "N/A",
+              Age: elephantData?.age || "N/A",
+              Gender: elephantData?.gender || "N/A",
               predictions,
               Status: elephantData?.status || "Unknown",
               Battery: elephantData?.Battery || "N/A",
@@ -80,6 +83,7 @@ export const GlobalDataProvider = ({ children }) => {
           }
         );
 
+        console.log("Formatted data:", formattedData);
         setElephants(formattedData);
         setNotifications((prev) => [...prev, ...newNotifications]);
       }

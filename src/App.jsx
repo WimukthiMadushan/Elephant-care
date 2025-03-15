@@ -5,6 +5,7 @@ import DeviceFeatures from "./Pages/DeviceFeatres/DeviceFeatures";
 import ElephantHealth from "./Pages/ElephantHealth/ElephantHealth";
 import Charts from "./Pages/Charts/Charts";
 import ElephantProfile from "./Pages/ElephantProfile/ElephantProfile";
+import AddElephant from "./Pages/AddElephant/AddElephant";
 import "leaflet/dist/leaflet.css";
 import Notification from "./Pages/Notification/Notification";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/chartsdetails/:id" element={<Charts />} />
         <Route path="/elephantprofile/:id" element={<ElephantProfile />} />
         <Route path="/notification" element={<Notification />} />
+        <Route path="/addelephant" element={<AddElephant />} />
         <Route path="*" element={<h1>Not Found</h1>} />
       </Route>
     </Routes>
