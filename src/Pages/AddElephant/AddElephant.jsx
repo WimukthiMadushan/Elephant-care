@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { database, ref, set } from "./../../firebase";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddElephant = () => {
   const [elephantId, setElephantId] = useState("");
@@ -72,7 +73,9 @@ const AddElephant = () => {
     try {
       // Save to Realtime Database
       await set(ref(database, `predictions/${elephantId}`), elephantData);
-      alert("Elephant data added successfully!");
+      toast.success("Succesfully Added an elephant", {
+        position: "bottom-right",
+      });
       setElephantId("");
       setBeltNo("");
       setAge("");
@@ -80,7 +83,7 @@ const AddElephant = () => {
       navigate("/");
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("Failed to add elephant data.");
+      toast.error("Error Adding an elephant", { position: "bottom-right" });
     }
   };
 
@@ -116,7 +119,7 @@ const AddElephant = () => {
             required
           />
           <input
-            type="number"
+            type="text"
             placeholder="Age"
             value={age}
             onChange={(e) => setAge(e.target.value)}

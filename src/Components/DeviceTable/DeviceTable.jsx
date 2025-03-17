@@ -5,9 +5,26 @@ import BatteryIndicator from "../BatteryIndicator/BatteryIndicator";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { Tooltip } from "@mui/material";
+import Delete_Image from "./../../assets/Delete.png";
+import { getDatabase, ref, remove } from "firebase/database";
+import { toast } from "react-toastify";
 
 const DeviceTable = ({ device }) => {
   console.log(device);
+  const handleDelete = async (deviceId) => {
+    const dbRef = getDatabase();
+
+    try {
+      await remove(ref(dbRef, `predictions/${deviceId}`));
+      console.log(`Device ${deviceId} deleted successfully!`);
+      toast.success("Device deleted successfully!", {
+        position: "bottom-right",
+      });
+    } catch (error) {
+      console.error("Error deleting device:", error);
+      toast.error("Error Deleting the Device!", { position: "bottom-right" });
+    }
+  };
   return (
     <div className="border-2 border-gray-600 rounded-lg shadow-lg overflow-hidden bg-white w-full max-w-5xl mx-auto min-h-[15rem]">
       <div className="flex items-center justify-between bg-gray-50 px-6 py-4 border-b-2 border-gray-600">
@@ -36,10 +53,26 @@ const DeviceTable = ({ device }) => {
 
         {/* Status Dots */}
         <div className="flex items-center gap-2">
-          <span className="h-4 w-4 bg-blue-500 rounded-full border-2 border-gray-600"></span>
-          <span className="h-4 w-4 bg-white rounded-full border-2 border-gray-600"></span>
-          <span className="h-4 w-4 bg-white rounded-full border-2 border-gray-600"></span>
-          <span className="h-4 w-4 bg-white rounded-full border-2 border-gray-600"></span>
+          <span
+            className={`h-4 w-4 rounded-full border-2 border-gray-600 ${
+              device.status === "Normal" ? "bg-blue-500" : "bg-white"
+            }`}
+          ></span>
+          <span
+            className={`h-4 w-4 rounded-full border-2 border-gray-600 ${
+              device.status === "Healthy" ? "bg-green-500" : "bg-white"
+            }`}
+          ></span>
+          <span
+            className={`h-4 w-4 rounded-full border-2 border-gray-600 ${
+              device.status === "Critical" ? "bg-red-500" : "bg-white"
+            }`}
+          ></span>
+          <span
+            className={`h-4 w-4 rounded-full border-2 border-gray-600 ${
+              device.status === "Dead" ? "bg-black" : "bg-white"
+            }`}
+          ></span>
         </div>
 
         {/* ON/OFF Indicator */}
@@ -54,6 +87,12 @@ const DeviceTable = ({ device }) => {
             <span className="text-sm font-semibold">Off</span>
           </div>
         )}
+        <img
+          src={Delete_Image}
+          alt="recycle"
+          onClick={() => handleDelete(device.id)}
+          className="cursor-pointer"
+        />
       </div>
 
       {/* Table Body */}
@@ -66,7 +105,7 @@ const DeviceTable = ({ device }) => {
           <ul className="space-y-2 text-gray-700 text-sm">
             <li>
               <span className="font-bold">Name:</span>
-              <span className="ml-2">{device.Name}</span>
+              <span className="ml-2">{device.name}</span>
             </li>
             <li>
               <span className="font-bold">Heart Beat:</span>
@@ -82,15 +121,15 @@ const DeviceTable = ({ device }) => {
             </li>
             <li>
               <span className="font-bold">Age:</span>
-              <span className="ml-2">{device.Age}</span>
+              <span className="ml-2">{device.age}</span>
             </li>
             <li>
               <span className="font-bold">Gender</span>
-              <span className="ml-2">{device.Gender}</span>
+              <span className="ml-2">{device.gender}</span>
             </li>
             <li>
               <span className="font-bold">Status:</span>
-              <span className="ml-2">{device.Status}</span>
+              <span className="ml-2">{device.status}</span>
             </li>
             <li>
               <Link to={`/chartsdetails/${device.id}`} state={{ device }}>

@@ -3,6 +3,7 @@ import PreviousSituations from "../PreviousSituations/PreviousSituations";
 
 const SituationAnalysis = ({ data, elephantData }) => {
   console.log("here the data", data);
+  console.log("here the elephant data", elephantData);
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg mt-6 w-[90%] mx-auto">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">

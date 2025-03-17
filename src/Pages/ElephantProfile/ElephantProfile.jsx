@@ -9,7 +9,7 @@ function ElephantProfile() {
   const { id } = useParams();
   const mapRef = useRef(null);
   const situationRef = useRef(null);
-  const [elephantData, setElephantData] = useState(null);
+  const [elephantData, setElephantData] = useState();
 
   useEffect(() => {
     if (!id) return;
@@ -32,6 +32,7 @@ function ElephantProfile() {
     return <div className="text-center mt-10 text-lg">Loading...</div>;
   }
 
+  console.log("elephant data", elephantData);
   const situationData = [
     {
       parameter: "Heart Rate",
@@ -42,12 +43,28 @@ function ElephantProfile() {
       status: elephantData.predictions?.SPO2?.Estimation || "No Data",
     },
     {
-      parameter: "Gyroscope",
+      parameter: "Gyroscope Along X Axis",
       status: elephantData.predictions?.gyro_x?.Estimation || "No Data",
     },
     {
-      parameter: "Accelerometer",
+      parameter: "Gyroscope Along Y Axis",
+      status: elephantData.predictions?.gyro_y?.Estimation || "No Data",
+    },
+    {
+      parameter: "Gyroscope Along Z Axis",
+      status: elephantData.predictions?.gyro_z?.Estimation || "No Data",
+    },
+    {
+      parameter: "Accelerometer Along X Axis",
       status: elephantData.predictions?.acceleration_x?.Estimation || "No Data",
+    },
+    {
+      parameter: "Accelerometer Along Y Axis",
+      status: elephantData.predictions?.acceleration_y?.Estimation || "No Data",
+    },
+    {
+      parameter: "Accelerometer Along Z Axis",
+      status: elephantData.predictions?.acceleration_z?.Estimation || "No Data",
     },
   ];
 
@@ -81,15 +98,33 @@ function ElephantProfile() {
         <div className="flex-grow">
           <div className="mb-6">
             <h2 className="text-xl font-bold text-gray-700 mb-2">
-              Belt No:{" "}
+              Name:{" "}
               <span className="font-normal text-gray-600">
-                {elephantData.beltNo}
+                {elephantData.name}
               </span>
             </h2>
             <h2 className="text-xl font-bold text-gray-700 mb-2">
               Elephant Id:{" "}
               <span className="font-normal text-gray-600">
                 {elephantData.elephant_id}
+              </span>
+            </h2>
+            <h2 className="text-xl font-bold text-gray-700 mb-2">
+              Age:{" "}
+              <span className="font-normal text-gray-600">
+                {elephantData.age}
+              </span>
+            </h2>
+            <h2 className="text-xl font-bold text-gray-700 mb-2">
+              Gender:{" "}
+              <span className="font-normal text-gray-600">
+                {elephantData.gender}
+              </span>
+            </h2>
+            <h2 className="text-xl font-bold text-gray-700 mb-2">
+              Belt No:{" "}
+              <span className="font-normal text-gray-600">
+                {elephantData.beltNo}
               </span>
             </h2>
           </div>
@@ -99,8 +134,8 @@ function ElephantProfile() {
             <ul className="list-disc pl-5 space-y-2 text-gray-600">
               <li>Heart Beat: {elephantData.Heart_Beat} bpm</li>
               <li>Oxygen Level: {elephantData.Blood_Oxygen}%</li>
-              <li>Body Temperature: {elephantData.Body_Temperature}°F</li>
-              <li>Status: {elephantData.Status}</li>
+              <li>Body Temperature: {elephantData.Body_Temperature}°C</li>
+              <li>Status: {elephantData.status}</li>
             </ul>
           </div>
 
